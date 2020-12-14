@@ -1,0 +1,114 @@
+<!Doctype html>
+<html>
+<head>
+<title>双色球</title>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    .header{
+        background-color:yellow;
+        width:100%;
+        height:100px;
+        border:1px solid red;
+        line-height: 100px;/*让div中的文字内容垂直居中*/
+        text-align: center;/*让文字水平居中*/
+    }
+    .main{
+        margin:0 auto;    
+        width:100%;
+        height:100px;
+    
+    }
+
+    #num{
+     position: relative;
+        width:25%;
+        height:100px;
+        border:1px solid red;    
+        margin:0 auto;    
+    }
+    #redNum{        
+        color:red;
+        float:left;
+        border:1px solid red;
+    }
+    #blueNum{        
+        color:blue;
+        float:left;    
+        border:1px solid red;        
+    }
+
+</style>
+</head>
+<body>
+<div class="header">
+双色球
+</div>
+<div class="content">
+<pre>
+双色球玩法简单介绍：
+　　“双色球”彩票投注区分为红色球号码区和蓝色球号码区。每注投注号码由6个红色球号码和1个蓝色球号码组成。
+红色球号码从1--33中选择；蓝色球号码从1--16中选择。
+程序要求：
+　　1、彩票号码按从大到小的顺序输出，且无重复数字
+　　2、不足两位的号码高位补0
+</pre>
+</div>
+<hr>
+<input onclick="createNum()" type = "button"value="点击生成双色球号码"/>
+<hr>
+<div class="main">
+    <div id="num">
+        <div id="redNum"></div>
+        <div id="blueNum"></div>
+    </div>
+</div>
+
+
+</body>
+
+<script>
+
+    //js随机数1到33生成不重复的
+    function createNum(){
+        // 装随机数
+        var arr=[];//容器        
+        
+        //红色球 6个
+        while(arr.length<6){
+            var num = Math.floor(Math.random()*33)+1;//js随机数1到33
+            if(-1 == arr.indexOf(num)){//数组中不存在
+                num = parseInt(num,10);
+                arr.push(prefixInteger(num,2));    
+            }
+        }        
+        console.log("红色球: "+arr);
+        
+        var redDiv = document.getElementById("redNum");
+        redDiv.innerHTML = arr;
+        
+        //蓝色球 1个
+        while(arr.length<7){
+            var num = Math.floor(Math.random()*16)+1;//js随机数1到16
+            if(-1 == arr.indexOf(num)){//数组中不存在
+                num = parseInt(num,10);
+                arr.push(prefixInteger(num,2));    
+            }
+        }    
+        console.log("红色球+蓝色球: "+arr);
+        
+        var blueDiv = document.getElementById("blueNum");
+        blueDiv.innerHTML = ","+arr[6];
+    }
+    
+    // num传入的数字，n需要的字符长度
+    //例如：传入6，需要的字符长度为3，调用方法后字符串结果为：006
+    function prefixInteger(num, n) {
+        return (Array(n).join(0) + num).slice(-n);
+    }
+
+
+</script>
+</html>
